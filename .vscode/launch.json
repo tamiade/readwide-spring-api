@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ReadWideApplication<ReadWide>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "capstone.ReadWide.ReadWideApplication",
+            "projectName": "ReadWide",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ReadWideApplication<ReadWide>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.capstone.readWide.ReadWideApplication",
+            "projectName": "ReadWide",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
