@@ -19,6 +19,16 @@
             "projectName": "ReadWide",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ReadWideApplication<readWide>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.capstone.readWide.ReadWideApplication",
+            "projectName": "readWide",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

@@ -5,9 +5,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Getter
+@Setter
 @Table(name = "books")
 public class Book {
     @Id
@@ -15,7 +19,7 @@ public class Book {
     private Integer id;
 
     @Column(name = "title")
-    private String name;
+    private String title;
 
     @Column(name = "author")
     private String author;
