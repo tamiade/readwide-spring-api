@@ -26,4 +26,10 @@ public class Book {
 
     @Column(name = "reflection")
     private String reflection;
+
+    @Column(name = "thumbnail")
+    private String thumbnail;
+
+    @Column(name = "googleBookId")
+    private String googleBookId;
 }
