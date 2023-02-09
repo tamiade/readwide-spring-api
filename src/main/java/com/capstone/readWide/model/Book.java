@@ -5,8 +5,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.Set;
 
 
 @Entity
@@ -24,8 +26,8 @@ public class Book {
     @Column(name = "author")
     private String author;
 
-    @Column(name = "reflection")
-    private String reflection;
+    @OneToMany(mappedBy = "book")
+    private Set<Reflection> reflection;
 
     @Column(name = "thumbnail")
     private String thumbnail;

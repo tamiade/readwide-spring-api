@@ -1,8 +1,6 @@
 package com.capstone.readWide.controller;
 
 import java.lang.Iterable;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import com.capstone.readWide.model.Book;
