@@ -26,6 +26,9 @@ public class Book {
     @Column(name = "author")
     private String author;
 
+    @Column(name = "description")
+    private String description;
+
     @OneToMany(mappedBy = "book")
     private Set<Reflection> reflection;
 
