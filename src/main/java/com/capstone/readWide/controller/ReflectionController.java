@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.util.ObjectUtils;
@@ -33,9 +34,9 @@ public class ReflectionController {
     this.bookRepository = bookRepository;
     }
 
-    @GetMapping("/get")
-    public Iterable<Reflection> getAllReflections() {
-        return this.reflectionRepository.findAll();
+    @GetMapping("/get/{book-id}")
+    public Optional<Iterable<Reflection>> getAllReflections(@PathVariable("book-id") Integer bookId) {
+        return this.reflectionRepository.findByBookId(bookId);
     }
 
     @PostMapping("/add")
