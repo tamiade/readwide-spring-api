@@ -10,6 +10,7 @@ import com.capstone.readWide.model.ReflectionInput;
 import com.capstone.readWide.repository.BookRepository;
 import com.capstone.readWide.repository.ReflectionRepository;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -26,6 +27,11 @@ public class ReflectionController {
     public ReflectionController(final ReflectionRepository reflectionRepository, final BookRepository bookRepository) {
     this.reflectionRepository = reflectionRepository;
     this.bookRepository = bookRepository;
+    }
+
+    @GetMapping
+    public Iterable<Reflection> getAllReflections() {
+        return this.reflectionRepository.findAll();
     }
 
     @PostMapping("/reflections")
