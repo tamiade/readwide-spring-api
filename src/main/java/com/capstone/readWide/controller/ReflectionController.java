@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
@@ -21,6 +22,7 @@ import org.springframework.util.ObjectUtils;
 
 @CrossOrigin
 @RestController
+@RequestMapping("/reflections")
 public class ReflectionController {
 
     private final ReflectionRepository reflectionRepository;
@@ -31,12 +33,12 @@ public class ReflectionController {
     this.bookRepository = bookRepository;
     }
 
-    @GetMapping
+    @GetMapping("/get")
     public Iterable<Reflection> getAllReflections() {
         return this.reflectionRepository.findAll();
     }
 
-    @PostMapping("/reflections")
+    @PostMapping("/add")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void addUserReflection(@RequestBody ReflectionInput reflectionInput) {
         if (ObjectUtils.isEmpty(reflectionInput.submittedBy)) {
