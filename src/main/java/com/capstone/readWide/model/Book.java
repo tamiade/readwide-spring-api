@@ -34,7 +34,4 @@ public class Book {
 
     @Column(name = "thumbnail")
     private String thumbnail;
-
-    @Column(name = "googleBookId")
-    private String googleBookId;
 }
