@@ -114,20 +114,20 @@ public class BookController {
         return newBook;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public Book deleteBook(@PathVariable("id") Integer id) {
-        Optional<Iterable<Reflection>> reflectionsToDelete = this.reflectionRepository.findByBookId(id);
-        if (reflectionsToDelete.isPresent())
-        {
-            this.reflectionRepository.deleteAll(reflectionsToDelete.get());
-        }
+    // @DeleteMapping("/delete/{id}")
+    // public Book deleteBook(@PathVariable("id") Integer id) {
+    //     Optional<Iterable<Reflection>> reflectionsToDelete = this.reflectionRepository.findByBookId(id);
+    //     if (reflectionsToDelete.isPresent())
+    //     {
+    //         this.reflectionRepository.deleteAll(reflectionsToDelete.get());
+    //     }
 
-        Optional<Book> bookToDeleteOptional = this.bookRepository.findById(id);
-        if (!bookToDeleteOptional.isPresent()) {
-            return null;
-        }
-        Book bookToDelete = bookToDeleteOptional.get();
-        this.bookRepository.delete(bookToDelete);
-        return bookToDelete;
-    }
+    //     Optional<Book> bookToDeleteOptional = this.bookRepository.findById(id);
+    //     if (!bookToDeleteOptional.isPresent()) {
+    //         return null;
+    //     }
+    //     Book bookToDelete = bookToDeleteOptional.get();
+    //     this.bookRepository.delete(bookToDelete);
+    //     return bookToDelete;
+    // }
 }
