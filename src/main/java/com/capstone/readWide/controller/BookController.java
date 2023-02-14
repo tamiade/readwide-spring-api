@@ -110,7 +110,7 @@ public class BookController {
         return newBook;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public Book deleteBook(@PathVariable("id") Integer id) {
         Optional<Book> bookToDeleteOptional = this.bookRepository.findById(id);
         if (!bookToDeleteOptional.isPresent()) {
