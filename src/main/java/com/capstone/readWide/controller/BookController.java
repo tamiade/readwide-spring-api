@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.util.ObjectUtils;
@@ -33,6 +35,16 @@ public class BookController {
 
     public BookController(final BookRepository bookRepository) {
     this.bookRepository = bookRepository;
+    }
+
+    @GetMapping("/{id}")
+    public Book getBook(@PathVariable Integer id) {
+        Optional<Book> book = bookRepository.findById(id);
+        if (book.isPresent()) {
+            return book.get();
+        }
+
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping
@@ -96,5 +108,16 @@ public class BookController {
         }
         Book newBook = this.bookRepository.save(book);
         return newBook;
+    }
+
+    @DeleteMapping("/{id}")
+    public Book deleteBook(@PathVariable("id") Integer id) {
+        Optional<Book> bookToDeleteOptional = this.bookRepository.findById(id);
+        if (!bookToDeleteOptional.isPresent()) {
+            return null;
+        }
+        Book bookToDelete = bookToDeleteOptional.get();
+        this.bookRepository.delete(bookToDelete);
+        return bookToDelete;
     }
 }
