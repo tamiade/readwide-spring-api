@@ -6,7 +6,9 @@ import java.util.Optional;
 // import java.util.HashMap;
 
 import com.capstone.readWide.model.Book;
+import com.capstone.readWide.model.Reflection;
 import com.capstone.readWide.repository.BookRepository;
+import com.capstone.readWide.repository.ReflectionRepository;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,9 +34,11 @@ import org.springframework.util.ObjectUtils;
 public class BookController {
 
     private final BookRepository bookRepository;
+    private final ReflectionRepository reflectionRepository;
 
-    public BookController(final BookRepository bookRepository) {
-    this.bookRepository = bookRepository;
+    public BookController(final BookRepository bookRepository, final ReflectionRepository reflectionRepository) {
+        this.bookRepository = bookRepository;
+        this.reflectionRepository = reflectionRepository;
     }
 
     @GetMapping("/{id}")
@@ -112,6 +116,12 @@ public class BookController {
 
     @DeleteMapping("/delete/{id}")
     public Book deleteBook(@PathVariable("id") Integer id) {
+        Optional<Iterable<Reflection>> reflectionsToDelete = this.reflectionRepository.findByBookId(id);
+        if (reflectionsToDelete.isPresent())
+        {
+            this.reflectionRepository.deleteAll(reflectionsToDelete.get());
+        }
+
         Optional<Book> bookToDeleteOptional = this.bookRepository.findById(id);
         if (!bookToDeleteOptional.isPresent()) {
             return null;
