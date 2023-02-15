@@ -56,18 +56,18 @@ public class BookController {
         return this.bookRepository.findAll();
     }
 
-    // @GetMapping("/search")
-    // public Optional<Book> searchBooks(@RequestParam(name="title", required=false) String title, @RequestParam(name="author", required=false) String author) {
-    //     if (title != null && author != null) {
-    //         return this.bookRepository.findByTitleAndAuthor(title, author);
-    //     } else if (title != null) {
-    //         return this.bookRepository.findByTitle(title);
-    //     } else if (author != null) {
-    //         return this.bookRepository.findByAuthor(author);
-    //     } else {
-    //         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry, you must enter a valid title or author, or the Book you entered does not exist on ReadWide!");
-    //     }
-    // }
+    @GetMapping("/search")
+    public Optional<Book> searchBooks(@RequestParam(name="title", required=false) String title, @RequestParam(name="author", required=false) String author) {
+        if (title != null && author != null) {
+            return this.bookRepository.findByTitleAndAuthor(title, author);
+        } else if (title != null) {
+            return this.bookRepository.findByTitle(title);
+        } else if (author != null) {
+            return this.bookRepository.findByAuthor(author);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry, you must enter a valid title or author, or the Book you entered does not exist on ReadWide!");
+        }
+    }
 
     // private HashMap<String, String> callGoogleBooksApi(String bookTitle) {
     //     String url = "https://www.googleapis.com/books/v1/volumes?q={queryParameter}";
@@ -114,20 +114,20 @@ public class BookController {
         return newBook;
     }
 
-    // @DeleteMapping("/delete/{id}")
-    // public Book deleteBook(@PathVariable("id") Integer id) {
-    //     Optional<Iterable<Reflection>> reflectionsToDelete = this.reflectionRepository.findByBookId(id);
-    //     if (reflectionsToDelete.isPresent())
-    //     {
-    //         this.reflectionRepository.deleteAll(reflectionsToDelete.get());
-    //     }
+    @DeleteMapping("/delete/{id}")
+    public Book deleteBook(@PathVariable("id") Integer id) {
+        Optional<Iterable<Reflection>> reflectionsToDelete = this.reflectionRepository.findByBookId(id);
+        if (reflectionsToDelete.isPresent())
+        {
+            this.reflectionRepository.deleteAll(reflectionsToDelete.get());
+        }
 
-    //     Optional<Book> bookToDeleteOptional = this.bookRepository.findById(id);
-    //     if (!bookToDeleteOptional.isPresent()) {
-    //         return null;
-    //     }
-    //     Book bookToDelete = bookToDeleteOptional.get();
-    //     this.bookRepository.delete(bookToDelete);
-    //     return bookToDelete;
-    // }
+        Optional<Book> bookToDeleteOptional = this.bookRepository.findById(id);
+        if (!bookToDeleteOptional.isPresent()) {
+            return null;
+        }
+        Book bookToDelete = bookToDeleteOptional.get();
+        this.bookRepository.delete(bookToDelete);
+        return bookToDelete;
+    }
 }
